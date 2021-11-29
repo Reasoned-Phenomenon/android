@@ -28,7 +28,48 @@ public class MainActivity extends AppCompatActivity {
         txtNum2 = findViewById(R.id.txtNum2);
         
         tv = findViewById(R.id.txtResult); //결과창
-        
+
+
+
+        //이벤트 핸들러 - 동일한 핸들러로 처리.
+        View.OnClickListener handler = v -> {
+
+            int n1 = Integer.parseInt(txtNum1.getText().toString());
+            int n2 = Integer.parseInt(txtNum2.getText().toString());
+            int result =0;
+            switch (v.getId()) {
+                case R.id.btn_plus: result = n1+n2; break;
+                case R.id.btn_minus: result = n1 - n2; break;
+                case R.id.btn_multiple: result = n1 * n2; break;
+                //case R.id.btn_divide: result = n1 / n2; break; //double 어떻게 하면 좋을지.
+            }
+
+            tv.setText(String.valueOf(result));
+
+        };
+
+        btn_plus.setOnClickListener(handler);
+        btn_minus.setOnClickListener(handler);
+        btn_multiple.setOnClickListener(handler);
+        //나눗셈
+        btn_divide.setOnClickListener( v-> {
+            String strNum1 = txtNum1.getText().toString();
+            String strNum2 = txtNum2.getText().toString();
+
+            double num1 = Integer.parseInt(strNum1);
+            double num2 = Integer.parseInt(strNum2);
+            double calcNum=0;
+            if( num2 != 0) {
+
+                calcNum = (double) num1 / num2;
+            }
+
+            tv.setText(String.valueOf(calcNum));
+
+        });
+
+
+
 //        //덧셈
 //        btn_plus.setOnClickListener( v-> {
 //            String strNum1 = txtNum1.getText().toString();
@@ -85,55 +126,6 @@ public class MainActivity extends AppCompatActivity {
 //            tv.setText(String.valueOf(calcNum));
 //
 //        });
-
-        //이벤트 핸들러 - 동일한 핸들러로 처리.
-        View.OnClickListener handler = v -> {
-
-            int n1 = Integer.parseInt(txtNum1.getText().toString());
-            int n2 = Integer.parseInt(txtNum2.getText().toString());
-            int result =0;
-            switch (v.getId()) {
-                case R.id.btn_plus: result = n1+n2; break;
-                case R.id.btn_minus: result = n1 - n2; break;
-                case R.id.btn_multiple: result = n1 * n2; break;
-                //case R.id.btn_divide: result = n1 / n2; break; //double 어떻게 하면 좋을지.
-            }
-
-            tv.setText(String.valueOf(result));
-
-        };
-
-        btn_plus.setOnClickListener(handler);
-        btn_minus.setOnClickListener(handler);
-        btn_multiple.setOnClickListener(handler);
-        //나눗셈
-        btn_divide.setOnClickListener( v-> {
-            String strNum1 = txtNum1.getText().toString();
-            String strNum2 = txtNum2.getText().toString();
-
-            double num1 = Integer.parseInt(strNum1);
-            double num2 = Integer.parseInt(strNum2);
-
-            double calcNum = (double) num1 / num2;
-
-            tv.setText(String.valueOf(calcNum));
-
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //1번 방법 - 상속
 //        btn.setOnClickListener(this); // implements View.OnClickListener 필요.

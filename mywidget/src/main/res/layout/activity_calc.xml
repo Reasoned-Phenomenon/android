@@ -74,13 +74,13 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:width="70dp"
-            android:text="덧셈" />
+            android:text="@string/btnPlus"/>
 
         <Button
             android:id="@+id/btn_minus"
             android:layout_width="70dp"
             android:layout_height="40dp"
-            android:text="뺄셈" />
+            android:text="@string/btnMinus" />
 
         <Button
             android:id="@+id/btn_multiple"
@@ -89,7 +89,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:width="70dp"
-            android:text="곱셈" />
+            android:text="@string/btnMultiple" />
 
         <Button
             android:id="@+id/btn_divide"
@@ -97,7 +97,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:width="70dp"
-            android:text="나눗셈" />
+            android:text="@string/btnDivide" />
     </LinearLayout>
 
     <LinearLayout
