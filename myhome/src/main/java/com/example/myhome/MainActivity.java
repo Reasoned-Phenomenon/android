@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -40,40 +41,54 @@ public class MainActivity extends AppCompatActivity {
             //16번까지 도착했으면 게임 완료라는 토스트
             if(startNum == 16) {
                 Toast.makeText(this,"게임끝",Toast.LENGTH_SHORT).show();
+
             }
 
         };
+        View.OnClickListener newGameHandler = v-> {
 
-        //시작숫자 초기화
-        startNum = 1;
+            v.setVisibility(View.INVISIBLE);
 
-        //1차원 배열로 16개의 값 - 임의의 순서 -> 배열값 넣어주면 됨.
-        List<Integer> list = new ArrayList<>();
+            //시작숫자 초기화
+            startNum = 1;
 
-        for (int i = 0; i < 16; i++) {
-            list.add(i + 1);
-        }
+            //1차원 배열로 16개의 값 - 임의의 순서 -> 배열값 넣어주면 됨.
+            List<Integer> list = new ArrayList<>();
 
-        Collections.shuffle(list);
+            for (int i = 0; i < 16; i++) {
+                list.add(i + 1);
+            }
+            //랜덤 섞기
+            Collections.shuffle(list);
 
-        for (int i = 0; i < 16; i++) {
+            //카드 16장 배치
+            for (int i = 0; i < 16; i++) {
 
-            Button btn = new Button(this);
-            btn.setText(String.valueOf(list.get(i)));
+                Button btn = new Button(this);
+                btn.setText(String.valueOf(list.get(i)));
 
-            linear.addView(btn);
+                linear.addView(btn);
 
-            btn.setOnClickListener(handler);
-        }
+                btn.setOnClickListener(handler);
+            }
+        };
+
+        LinearLayout newLayout = new LinearLayout(this);
 
         //게임 시작 버튼
-//        Button startBtn = new Button(this);
-//        startBtn.setText("시작");
-//
-//        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-//        linearLayout.addView(startBtn);
-//
-//        startBtn.setOnClickListener(newGameHandler);
+        Button startBtn = new Button(this);
+        startBtn.setText("시작");
+        startBtn.setOnClickListener(newGameHandler);
+        linear.addView(startBtn);
+//        newLayout.addView(startBtn);
+//        LinearLayout.LayoutParams.WRAP_CONTENT
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//              200,
+//              200
+//        );
+
+//        setContentView(newLayout,layoutParams);
+
 
     }
 }
