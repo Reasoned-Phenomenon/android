@@ -98,23 +98,17 @@ public class AddActivity extends AppCompatActivity {
 
             String selectId = et_id.getText().toString();
 
-            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
             String sql = "select _id, name, age, mobile from emp where _id=" + selectId;
 
             Cursor cursor = db.rawQuery(sql, null);
 
-            while (cursor.moveToNext()) {
+            if (cursor.moveToNext()) {
 
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put("_id", cursor.getString(0));
-                map.put("name", cursor.getString(1));
-                map.put("age", cursor.getString(2));
-                map.put("mobile", cursor.getString(3));
-
-                list.add(map);
+                et_name.setText(cursor.getString(1));
+                et_age.setText(cursor.getString(2));
+                et_phone.setText(cursor.getString(3));
 
             }
 
@@ -124,11 +118,11 @@ public class AddActivity extends AppCompatActivity {
 //            intent.putExtra("one",list);
 //            startActivity(intent);
 
-            Intent intentSelect = new Intent(getApplicationContext(), MainActivity.class);
+            //Intent intentSelect = new Intent(getApplicationContext(), MainActivity.class);
 
-            intentSelect.putExtra("one",list);
-            setResult(2, intentSelect);
-            finish();
+            //intentSelect.putExtra("one",list);
+//            setResult(2, intentSelect);
+//            finish();
         };
 
         //수정
@@ -149,12 +143,20 @@ public class AddActivity extends AppCompatActivity {
             db.update("emp", contentValues, "_id=?", new String[]{updateId});
 
             db.close();
+
+            String str = updateId+"/"+updateName+"/"+updateAge+"/"+updatePhone;
+            Intent intentUpdate = new Intent(getApplicationContext(), MainActivity.class);
+            intentUpdate.putExtra("update",str);
+            setResult(2, intentUpdate);
+            finish();
+
         };
 
         btn_insert.setOnClickListener(insertHandler);
         btn_select.setOnClickListener(selectHandler);
         btn_delete.setOnClickListener(deleteHandler);
         btn_update.setOnClickListener(updateHandler);
+
     }
 
 }

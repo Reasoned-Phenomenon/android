@@ -118,20 +118,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //등록
         if(resultCode == 1) {
             System.out.println(data.getExtras().get("msg"));
             Toast.makeText(this,"등록됐습니다.",Toast.LENGTH_SHORT).show();
-
+        //수정
         } else if(resultCode == 2) {
-            System.out.println(data.getExtras());
-            System.out.println(data.getExtras().get("one"));
-            System.out.println(data.getStringArrayListExtra("one"));
+//            System.out.println(data.getExtras());
+//            System.out.println(data.getExtras().get("one"));
+//            System.out.println(data.getStringArrayListExtra("one"));
 
-            ArrayList<Parcelable> getList = data.getParcelableArrayListExtra("one");
-                et_view.append("id: " + ((Map)getList.get(0)).get("_id"));
-                et_view.append(" name: " + ((Map)getList.get(0)).get("name"));
-                et_view.append(" age: " + ((Map)getList.get(0)).get("age"));
-                et_view.append(" mobile: " + ((Map)getList.get(0)).get("mobile") + "\n");
+//            ArrayList<Parcelable> getList = data.getParcelableArrayListExtra("one");
+//                et_view.append("id: " + ((Map)getList.get(0)).get("_id"));
+//                et_view.append(" name: " + ((Map)getList.get(0)).get("name"));
+//                et_view.append(" age: " + ((Map)getList.get(0)).get("age"));
+//                et_view.append(" mobile: " + ((Map)getList.get(0)).get("mobile") + "\n");
+            String str = data.getStringExtra("update");
+            et_view.setText(str);
+            
+            Toast.makeText(this,"1건 수정 됐습니다.",Toast.LENGTH_SHORT).show();
 
         }
 
