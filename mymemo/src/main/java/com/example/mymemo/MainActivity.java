@@ -3,6 +3,7 @@ package com.example.mymemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_insert, btn_read, btn_select, btn_delete, btn_update;
+    Button btn_insert, btn_read, btn_select, btn_delete, btn_update, btn_backMenu;
     EditText et_name, et_view, et_age, et_phone, et_id;
 
     @Override
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         btn_select = findViewById(R.id.btn_select);
         btn_delete = findViewById(R.id.btn_delete);
         btn_update = findViewById(R.id.btn_update);
+
+        btn_backMenu = findViewById(R.id.btn_backMenu);
 
         et_name = findViewById(R.id.et_name);
         et_age = findViewById(R.id.et_age);
@@ -46,14 +49,17 @@ public class MainActivity extends AppCompatActivity {
             String InsertPhone = et_phone.getText().toString();
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            String sqlInsert = "INSERT INTO emp " +
-                    "(NAME, age, mobile) VALUES ('" + InsertName + "','"+InsertAge+"','"+InsertPhone+"')";
+            String sqlInsert = "INSERT INTO emp (NAME, age, mobile) "
+                                //+"VALUES ('" + InsertName + "','"+InsertAge+"','"+InsertPhone+"')";
+                                +"VALUES (? ,?, ?)";
 
-            db.execSQL(sqlInsert);
+            db.execSQL(sqlInsert, new Object[]{InsertName,InsertAge,InsertPhone});
 
             et_name.setText("");
             et_age.setText("");
             et_phone.setText("");
+
+            db.close();
 
         };
 
@@ -112,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
                 et_view.append(" mobile: " + list.get(i).get("mobile") + "\n");
             }
 
+            db.close();
+
         };
 
         //삭제
@@ -121,9 +129,13 @@ public class MainActivity extends AppCompatActivity {
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-            db.delete("emp", "_id=?", new String[]{deleteId});
+            //db.delete("emp", "_id=?", new String[]{deleteId});
 
-            //toast
+            //sql 사용
+//            String sql = "DELETE FROM emp WHERE _id="+deleteId;
+//            db.execSQL(sql);
+
+            db.close();
         };
 
         //단건조회
@@ -159,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
                 et_view.append(" mobile: " + list.get(i).get("mobile") + "\n");
             }
 
+            db.close();
+
         };
 
         //수정
@@ -176,8 +190,9 @@ public class MainActivity extends AppCompatActivity {
             contentValues.put("age", updateAge);
             contentValues.put("mobile", updatePhone);
 
-            //id를 int로 바꿔야할지 고민
             db.update("emp", contentValues, "_id=?", new String[]{updateId});
+
+            db.close();
         };
 
 
@@ -188,6 +203,10 @@ public class MainActivity extends AppCompatActivity {
         btn_delete.setOnClickListener(deleteHandler);
         btn_update.setOnClickListener(updateHandler);
 
+        btn_update.setOnClickListener(v-> {
+            Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+            startActivity(intent);
+        });
 
     }
 }

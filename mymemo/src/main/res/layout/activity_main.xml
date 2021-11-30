@@ -130,6 +130,14 @@
             android:layout_margin="5dp"
             android:text="조회" />
 
+        <Button
+            android:id="@+id/btn_backMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="돌아가기" />
+
     </LinearLayout>
 
     <EditText
