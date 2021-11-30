@@ -68,8 +68,12 @@ public class AddActivity extends AppCompatActivity {
             db.close();
 
             Intent intentInsert = new Intent(getApplicationContext(), MainActivity.class);
-            intentInsert.putExtra("등록","등록");
-            startActivity(intentInsert);
+            //intentInsert.putExtra("등록","등록");
+            //startActivity(intentInsert);
+
+            intentInsert.putExtra("msg","등록완료");
+            setResult(1, intentInsert);
+            finish();
 
         };
 
@@ -116,9 +120,15 @@ public class AddActivity extends AppCompatActivity {
 
             db.close();
 
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.putExtra("one",list);
-            startActivity(intent);
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            intent.putExtra("one",list);
+//            startActivity(intent);
+
+            Intent intentSelect = new Intent(getApplicationContext(), MainActivity.class);
+
+            intentSelect.putExtra("one",list);
+            setResult(2, intentSelect);
+            finish();
         };
 
         //수정

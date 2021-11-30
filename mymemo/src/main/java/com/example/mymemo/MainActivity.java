@@ -1,22 +1,26 @@
 package com.example.mymemo;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_read, btn_backMenu;
+    Button btn_read, btn_goToAdd;
     EditText et_view;
 
     @Override
@@ -26,18 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
         btn_read = findViewById(R.id.btn_read);
 
-        btn_backMenu = findViewById(R.id.btn_goToAdd);
+        btn_goToAdd = findViewById(R.id.btn_goToAdd);
 
         et_view = findViewById(R.id.et_view);
 
-        Intent intent = getIntent();
-
-        if(intent.getExtras() !=null) {
-            ArrayList<String> getList =(ArrayList<String>) intent.getExtras().getSerializable("one");
-            System.out.println(getList.get(0));
+//        Intent intent = getIntent();
+//
+//        if(intent.getExtras() !=null) {
+//            ArrayList<String> getList =(ArrayList<String>) intent.getExtras().getSerializable("one");
+//            System.out.println(getList.get(0));
 //            String str = getList.get(0);
 //            et_view.setText(str);
-        }
+        //}
 
         //db.close();
 
@@ -102,15 +106,34 @@ public class MainActivity extends AppCompatActivity {
 
         btn_read.setOnClickListener(readHandler);
 
-        btn_backMenu.setOnClickListener(v-> {
-            Intent intentBack = new Intent(getApplicationContext(), AddActivity.class);
-            startActivity(intentBack);
+        btn_goToAdd.setOnClickListener(v-> {
+            Intent intentGoToAdd = new Intent(getApplicationContext(), AddActivity.class);
+//            startActivity(intentBack);
+            startActivityForResult(intentGoToAdd,1);
         });
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(resultCode == 1) {
+            System.out.println(data.getExtras().get("msg"));
+            Toast.makeText(this,"등록됐습니다.",Toast.LENGTH_SHORT).show();
 
+        } else if(resultCode == 2) {
+            System.out.println(data.getExtras());
+            System.out.println(data.getExtras().get("one"));
+            System.out.println(data.getStringArrayListExtra("one"));
 
+            ArrayList<Parcelable> getList = data.getParcelableArrayListExtra("one");
+                et_view.append("id: " + ((Map)getList.get(0)).get("_id"));
+                et_view.append(" name: " + ((Map)getList.get(0)).get("name"));
+                et_view.append(" age: " + ((Map)getList.get(0)).get("age"));
+                et_view.append(" mobile: " + ((Map)getList.get(0)).get("mobile") + "\n");
+
+        }
 
     }
 }
