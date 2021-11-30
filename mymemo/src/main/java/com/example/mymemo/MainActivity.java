@@ -2,16 +2,21 @@ package com.example.mymemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_insert, btn_read;
-    EditText et_name, et_view;
+    Button btn_insert, btn_read, btn_select, btn_delete, btn_update;
+    EditText et_name, et_view, et_age, et_phone, et_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +25,21 @@ public class MainActivity extends AppCompatActivity {
 
         btn_insert = findViewById(R.id.btn_insert);
         btn_read = findViewById(R.id.btn_read);
+        btn_select = findViewById(R.id.btn_select);
+        btn_delete = findViewById(R.id.btn_delete);
+        btn_update = findViewById(R.id.btn_update);
 
         et_name = findViewById(R.id.et_name);
+        et_age = findViewById(R.id.et_age);
+        et_phone = findViewById(R.id.et_phone);
+        et_id = findViewById(R.id.et_id);
+
         et_view = findViewById(R.id.et_view);
 
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext()); //DB, table 생성
 
-        View.OnClickListener handler = v -> {
+        //등록
+        View.OnClickListener insertHandler = v -> {
 
             String InsertName = et_name.getText().toString();
 
@@ -36,14 +49,141 @@ public class MainActivity extends AppCompatActivity {
 
             db.execSQL(sqlInsert);
 
-            et_view.setText(InsertName);
             et_name.setText("");
 
         };
 
         //db.close();
 
-        btn_insert.setOnClickListener(handler);
+//        View.OnClickListener readHandler = v -> {
+//
+//            SQLiteDatabase db = dbHelper.getReadableDatabase();
+//
+//            String sql = "select _id, name, age, mobile from emp order by _id desc ";
+//            String strView = "";
+//
+//            Cursor cursor = db.rawQuery(sql, null);
+//            while (cursor.moveToNext()) {
+//
+//                strView += "id:"+ cursor.getString(0)
+//                        +" name:"+cursor.getString(1)
+//                        +" age:"+cursor.getString(2)
+//                        +" mobile:"+cursor.getString(3)
+//                        +"\n";
+//
+//            }
+//
+//            et_view.setText(strView);
+//        };
+
+        //전체조회
+        View.OnClickListener readHandler = v -> {
+
+            et_view.setText("");
+            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            String sql = "select _id, name, age, mobile from emp order by _id desc ";
+
+            Cursor cursor = db.rawQuery(sql, null);
+
+            while (cursor.moveToNext()) {
+
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("_id", cursor.getString(0));
+                map.put("name", cursor.getString(1));
+                map.put("age", cursor.getString(2));
+                map.put("mobile", cursor.getString(3));
+
+                list.add(map);
+
+            }
+
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(list.size());
+                et_view.append("id: " + list.get(i).get("_id"));
+                et_view.append(" name: " + list.get(i).get("name"));
+                et_view.append(" age: " + list.get(i).get("age"));
+                et_view.append(" mobile: " + list.get(i).get("mobile") + "\n");
+            }
+
+        };
+
+        //삭제
+        View.OnClickListener deleteHandler = v -> {
+
+            String deleteId = et_id.getText().toString();
+
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            db.delete("emp", "_id=?", new String[]{deleteId});
+
+            //toast
+        };
+
+        //단건조회
+        View.OnClickListener selectHandler = v -> {
+
+            String selectId = et_id.getText().toString();
+
+            et_view.setText("");
+            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            String sql = "select _id, name, age, mobile from emp where _id=" + selectId;
+
+            Cursor cursor = db.rawQuery(sql, null);
+
+            while (cursor.moveToNext()) {
+
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("_id", cursor.getString(0));
+                map.put("name", cursor.getString(1));
+                map.put("age", cursor.getString(2));
+                map.put("mobile", cursor.getString(3));
+
+                list.add(map);
+
+            }
+
+            for (int i = 0; i < list.size(); i++) {
+                et_view.append("id: " + list.get(i).get("_id"));
+                et_view.append(" name: " + list.get(i).get("name"));
+                et_view.append(" age: " + list.get(i).get("age"));
+                et_view.append(" mobile: " + list.get(i).get("mobile") + "\n");
+            }
+
+        };
+
+        //수정
+        View.OnClickListener updateHandler = v -> {
+
+            String updateId = et_id.getText().toString();
+            String updateName = et_name.getText().toString();
+            String updateAge = et_age.getText().toString();
+            String updatePhone = et_phone.getText().toString();
+
+            SQLiteDatabase db = dbHelper.getWritableDatabase(); //데이터베이스 연결
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("name", updateName);
+            contentValues.put("age", updateAge);
+            contentValues.put("mobile", updatePhone);
+
+            //id를 int로 바꿔야할지 고민
+            db.update("emp", contentValues, "_id=?", new String[]{updateId});
+        };
+
+
+        //btn_insert, btn_read, btn_select, btn_delete,btn_update;
+        btn_insert.setOnClickListener(insertHandler);
+        btn_read.setOnClickListener(readHandler);
+        btn_select.setOnClickListener(selectHandler);
+        btn_delete.setOnClickListener(deleteHandler);
+        btn_update.setOnClickListener(updateHandler);
+
 
     }
 }
