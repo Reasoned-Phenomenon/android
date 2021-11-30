@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
         btn_backMenu = findViewById(R.id.btn_goToAdd);
 
         et_view = findViewById(R.id.et_view);
+
+        Intent intent = getIntent();
+
+        if(intent.getExtras() !=null) {
+            ArrayList<String> getList =(ArrayList<String>) intent.getExtras().getSerializable("one");
+            System.out.println(getList.get(0));
+//            String str = getList.get(0);
+//            et_view.setText(str);
+        }
 
         //db.close();
 
@@ -93,9 +103,14 @@ public class MainActivity extends AppCompatActivity {
         btn_read.setOnClickListener(readHandler);
 
         btn_backMenu.setOnClickListener(v-> {
-            Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-            startActivity(intent);
+            Intent intentBack = new Intent(getApplicationContext(), AddActivity.class);
+            startActivity(intentBack);
         });
+
+
+
+
+
 
     }
 }

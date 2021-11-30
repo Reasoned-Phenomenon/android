@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -66,6 +67,10 @@ public class AddActivity extends AppCompatActivity {
 
             db.close();
 
+            Intent intentInsert = new Intent(getApplicationContext(), MainActivity.class);
+            intentInsert.putExtra("등록","등록");
+            startActivity(intentInsert);
+
         };
 
         //삭제
@@ -85,41 +90,36 @@ public class AddActivity extends AppCompatActivity {
         };
 
         //단건조회
-//        View.OnClickListener selectHandler = v -> {
-//
-//            String selectId = et_id.getText().toString();
-//
-//            et_view.setText("");
-//            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-//
-//            SQLiteDatabase db = dbHelper.getReadableDatabase();
-//
-//            String sql = "select _id, name, age, mobile from emp where _id=" + selectId;
-//
-//            Cursor cursor = db.rawQuery(sql, null);
-//
-//            while (cursor.moveToNext()) {
-//
-//                HashMap<String, String> map = new HashMap<String, String>();
-//                map.put("_id", cursor.getString(0));
-//                map.put("name", cursor.getString(1));
-//                map.put("age", cursor.getString(2));
-//                map.put("mobile", cursor.getString(3));
-//
-//                list.add(map);
-//
-//            }
-//
-//            for (int i = 0; i < list.size(); i++) {
-//                et_view.append("id: " + list.get(i).get("_id"));
-//                et_view.append(" name: " + list.get(i).get("name"));
-//                et_view.append(" age: " + list.get(i).get("age"));
-//                et_view.append(" mobile: " + list.get(i).get("mobile") + "\n");
-//            }
-//
-//            db.close();
-//
-//        };
+        View.OnClickListener selectHandler = v -> {
+
+            String selectId = et_id.getText().toString();
+
+            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            String sql = "select _id, name, age, mobile from emp where _id=" + selectId;
+
+            Cursor cursor = db.rawQuery(sql, null);
+
+            while (cursor.moveToNext()) {
+
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("_id", cursor.getString(0));
+                map.put("name", cursor.getString(1));
+                map.put("age", cursor.getString(2));
+                map.put("mobile", cursor.getString(3));
+
+                list.add(map);
+
+            }
+
+            db.close();
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("one",list);
+            startActivity(intent);
+        };
 
         //수정
         View.OnClickListener updateHandler = v -> {
@@ -142,7 +142,7 @@ public class AddActivity extends AppCompatActivity {
         };
 
         btn_insert.setOnClickListener(insertHandler);
-        //btn_select.setOnClickListener(selectHandler);
+        btn_select.setOnClickListener(selectHandler);
         btn_delete.setOnClickListener(deleteHandler);
         btn_update.setOnClickListener(updateHandler);
     }
