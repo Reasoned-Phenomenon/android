@@ -42,14 +42,18 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener insertHandler = v -> {
 
             String InsertName = et_name.getText().toString();
+            String InsertAge = et_age.getText().toString();
+            String InsertPhone = et_phone.getText().toString();
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             String sqlInsert = "INSERT INTO emp " +
-                    "(NAME, age, mobile) VALUES ('" + InsertName + "',20,'010-211')";
+                    "(NAME, age, mobile) VALUES ('" + InsertName + "','"+InsertAge+"','"+InsertPhone+"')";
 
             db.execSQL(sqlInsert);
 
             et_name.setText("");
+            et_age.setText("");
+            et_phone.setText("");
 
         };
 
