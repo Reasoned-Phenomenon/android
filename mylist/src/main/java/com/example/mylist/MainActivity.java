@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 //        String[] data = new String[] {"","",""};  //직접 만들어 넣어도 됨
 //        String[] data = getResources().getStringArray(R.array.city); //배열 가져옴
 
-        List<Map<String,String>> list = new ArrayList<>();
+        ArrayList<Map<String,String>> list = new ArrayList<>();
         Map<String,String> map = new HashMap<String,String>();
 
         map.put("name","홍길동");

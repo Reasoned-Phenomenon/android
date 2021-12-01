@@ -6,15 +6,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class MyAdapter extends BaseAdapter {
 
-    List<Map<String,String>> data;
+    ArrayList<Map<String,String>> data;
 
     public MyAdapter() {};
-    public MyAdapter(List<Map<String, String>> data) {
+    public MyAdapter(ArrayList<Map<String, String>> data) {
         this.data = data;
     }
 
