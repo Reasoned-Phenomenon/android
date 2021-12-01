@@ -5,9 +5,6 @@
       <map>
         <entry key="..\:/dev/androidWork/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/androidWork/mylayout/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
-        <entry key="..\:/dev/androidWork/mylist/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
-        <entry key="..\:/dev/androidWork/mylist/src/main/res/layout/activity_recycle.xml" value="0.36614583333333334" />
-        <entry key="..\:/dev/androidWork/mylist/src/main/res/layout/list_item.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/androidWork/mymemo/src/main/res/layout/activity_add.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/androidWork/mymemo/src/main/res/layout/activity_list.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/androidWork/mymemo/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
@@ -15,6 +12,10 @@
         <entry key="..\:/dev/androidWork/mywidget/mypet/src/main/res/layout/activity_main.xml" value="0.3515625" />
         <entry key="..\:/dev/androidWork/mywidget/src/main/res/layout/activity_calc.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/androidWork/mywidget/src/main/res/layout/activity_main.xml" value="0.36186594202898553" />
+        <entry key="..\:/dev/workSpace_as/android/myhttp/src/main/res/layout/activity_main.xml" value="0.259375" />
+        <entry key="..\:/dev/workSpace_as/android/mylist/src/main/res/layout/activity_main.xml" value="0.18385416666666668" />
+        <entry key="..\:/dev/workSpace_as/android/mylist/src/main/res/layout/activity_recycle.xml" value="0.18385416666666668" />
+        <entry key="..\:/dev/workSpace_as/android/mylist/src/main/res/layout/list_item.xml" value="0.18385416666666668" />
       </map>
     </option>
   </component>
