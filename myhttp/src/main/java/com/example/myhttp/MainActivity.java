@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         btn_list = findViewById(R.id.btn_list);
-        btn_select = findViewById(R.id.btn_list);
-        btn_delete = findViewById(R.id.btn_list);
+        btn_select = findViewById(R.id.btn_select);
+        btn_delete = findViewById(R.id.btn_delete);
         btn_insert = findViewById(R.id.btn_insert);
 
         tv_view = findViewById(R.id.tv_view);
@@ -55,15 +55,16 @@ public class MainActivity extends AppCompatActivity {
 
             // 단건 조회
             //id값 가져와서
-            String targetId = et_id.getText().toString();
+            //String targetId = et_id.getText().toString();
 
 //            String url ="http://10.0.2.2/users?id=";//있는 id값 넣어서 조회하기.
-            String url ="http://10.0.2.2/users?id="+targetId;//있는 id값 넣어서 조회하기.
+            //String url ="http://10.0.2.2/users?id="+targetId;//있는 id값 넣어서 조회하기.
+            String url ="http://10.0.2.2/userList";
 
             StringRequest request = new StringRequest(url, s-> {
                 //단건조회 -> 이름과 패스워드 표시. Map이나 UserVO 사용.
-
-                List list = gson.fromJson(s, List.class); //형태확인해보기
+                System.out.println(s);
+                //List list = gson.fromJson(s, List.class); //형태확인해보기
 
 //                et_name.setText();
 //                et_pw.setText();
