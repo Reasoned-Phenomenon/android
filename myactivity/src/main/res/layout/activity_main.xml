@@ -7,55 +7,70 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:text="구글 맵"
-        app:layout_constraintStart_toStartOf="@+id/btn_call"
-        app:layout_constraintTop_toBottomOf="@+id/btn_call" />
-
-    <Button
         android:id="@+id/btn_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="122dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="전화"
+        app:layout_constraintEnd_toStartOf="@+id/btn_map"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="구글 맵"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sms"
+        app:layout_constraintStart_toEndOf="@+id/btn_call"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_sms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="@+id/btn_map"
-        app:layout_constraintTop_toBottomOf="@+id/btn_map" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="6dp"
+        android:gravity="center"
+        android:text="SMS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_map"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="@+id/btn_sms"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sms" />
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="105dp"
+        android:gravity="center"
+        android:text="사진"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_life"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="13dp"
+        android:gravity="center"
         android:text="Life"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="457dp" />
+        app:layout_constraintStart_toEndOf="@+id/btn_pic"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pic" />
 
     <Button
         android:id="@+id/btn_web"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="34dp"
+        android:gravity="center"
         android:text="Web"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="532dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_pic" />
 </androidx.constraintlayout.widget.ConstraintLayout>
