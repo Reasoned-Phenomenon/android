@@ -43,7 +43,7 @@ public class AddActivity extends AppCompatActivity {
         et_phone = findViewById(R.id.et_phone);
         et_id = findViewById(R.id.et_id);
 
-        et_view = findViewById(R.id.et_view); //수정필요
+        //et_view = findViewById(R.id.et_view); //수정필요
         
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext()); //DB, table 생성
 

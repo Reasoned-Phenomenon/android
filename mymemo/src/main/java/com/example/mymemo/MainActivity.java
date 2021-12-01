@@ -9,8 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     Button btn_read, btn_goToAdd;
-    EditText et_view;
+    //EditText et_view;
+    ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         btn_goToAdd = findViewById(R.id.btn_goToAdd);
 
-        et_view = findViewById(R.id.et_view);
+        //et_view = findViewById(R.id.et_view);
+
+        lv = findViewById(R.id.lv);
 
 //        Intent intent = getIntent();
 //
@@ -68,39 +73,72 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
 
+        ArrayList<String> list = new ArrayList<String>();
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "select _id, name, age, mobile from emp order by _id desc ";
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        while (cursor.moveToNext()) {
+            list.add(cursor.getString(1));
+        }
+
+        db.close();
+
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
+                android.R.layout.simple_list_item_1,
+                list);
+
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener((adapterView, view, i, l) -> {
+            Toast.makeText(this,list.get(i),Toast.LENGTH_SHORT).show();
+        });
+
         //전체조회
         View.OnClickListener readHandler = v -> {
 
-            et_view.setText("");
-            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+            //et_view.setText("");
+//            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+//
+//            SQLiteDatabase db = dbHelper.getReadableDatabase();
+//
+//            String sql = "select _id, name, age, mobile from emp order by _id desc ";
+//
+//            Cursor cursor = db.rawQuery(sql, null);
+//            while (cursor.moveToNext()) {
+//
+//                HashMap<String, String> map = new HashMap<String, String>();
+//                map.put("_id", cursor.getString(0));
+//                map.put("name", cursor.getString(1));
+//                map.put("age", cursor.getString(2));
+//                map.put("mobile", cursor.getString(3));
+//
+//                list.add(map);
+//
+//            }
 
-            SQLiteDatabase db = dbHelper.getReadableDatabase();
+//            for (int i = 0; i < list.size(); i++) {
+//                System.out.println(list.size());
+//                et_view.append("id: " + list.get(i).get("_id"));
+//                et_view.append(" name: " + list.get(i).get("name"));
+//                et_view.append(" age: " + list.get(i).get("age"));
+//                et_view.append(" mobile: " + list.get(i).get("mobile") + "\n");
+//            }
 
-            String sql = "select _id, name, age, mobile from emp order by _id desc ";
-
-            Cursor cursor = db.rawQuery(sql, null);
-
-            while (cursor.moveToNext()) {
-
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put("_id", cursor.getString(0));
-                map.put("name", cursor.getString(1));
-                map.put("age", cursor.getString(2));
-                map.put("mobile", cursor.getString(3));
-
-                list.add(map);
-
-            }
-
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.size());
-                et_view.append("id: " + list.get(i).get("_id"));
-                et_view.append(" name: " + list.get(i).get("name"));
-                et_view.append(" age: " + list.get(i).get("age"));
-                et_view.append(" mobile: " + list.get(i).get("mobile") + "\n");
-            }
-
-            db.close();
+//            db.close();
+//
+//            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
+//                    android.R.layout.simple_list_item_1,
+//                    list);
+//
+//            lv.setAdapter(adapter);
+//
+//            lv.setOnItemClickListener((adapterView, view, i, l) -> {
+//                Toast.makeText(this,list.get(i).get("name"),Toast.LENGTH_SHORT).show();
+//            });
 
         };
 
@@ -134,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 //                et_view.append(" age: " + ((Map)getList.get(0)).get("age"));
 //                et_view.append(" mobile: " + ((Map)getList.get(0)).get("mobile") + "\n");
             String str = data.getStringExtra("update");
-            et_view.setText(str);
+            //et_view.setText(str);
             
             Toast.makeText(this,"1건 수정 됐습니다.",Toast.LENGTH_SHORT).show();
 
