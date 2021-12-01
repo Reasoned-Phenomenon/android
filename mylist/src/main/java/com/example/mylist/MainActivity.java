@@ -51,24 +51,26 @@ public class MainActivity extends AppCompatActivity {
 //        lv.setOnItemClickListener((adapterView, view, i, l) -> {
 //            Toast.makeText(this,data[i],Toast.LENGTH_SHORT).show();
 //        });
-
+            //특정값 1개 + 아이디 부여
 //        SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(),
 //                list,
 //                android.R.layout.simple_list_item_1,
 //                new String[]{"name"},
 //                new int[]{android.R.id.text1});
-
+            //특정값 2개 + 아이디 부여
 //        SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(),
 //                list,
 //                android.R.layout.simple_list_item_2,
 //                new String[]{"name","addr"},
 //                new int[]{android.R.id.text1,android.R.id.text2});
+//      //
+//        SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(),
+//                list,
+//                android.R.layout.simple_list_item_checked,
+//                new String[]{"name"},
+//                new int[]{android.R.id.text1});
 
-        SimpleAdapter adapter = new SimpleAdapter(getApplicationContext(),
-                list,
-                android.R.layout.simple_list_item_checked,
-                new String[]{"name"},
-                new int[]{android.R.id.text1});
+        MyAdapter adapter = new MyAdapter(list);
 
         lv.setAdapter(adapter);
 
