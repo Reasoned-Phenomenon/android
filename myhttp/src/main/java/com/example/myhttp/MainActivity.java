@@ -55,20 +55,21 @@ public class MainActivity extends AppCompatActivity {
 
             // 단건 조회
             //id값 가져와서
-            //String targetId = et_id.getText().toString();
+            String targetId = et_id.getText().toString();
 
 //            String url ="http://10.0.2.2/users?id=";//있는 id값 넣어서 조회하기.
-            //String url ="http://10.0.2.2/users?id="+targetId;//있는 id값 넣어서 조회하기.
-            String url ="http://10.0.2.2/userList";
+            String url ="http://10.0.2.2/users?id="+targetId;//있는 id값 넣어서 조회하기.
 
             StringRequest request = new StringRequest(url, s-> {
                 //단건조회 -> 이름과 패스워드 표시. Map이나 UserVO 사용.
                 System.out.println(s);
-                //List list = gson.fromJson(s, List.class); //형태확인해보기
+                Map<String,String> map = gson.fromJson(s,Map.class);
+                System.out.println(map);
+                System.out.println();
 
-//                et_name.setText();
-//                et_pw.setText();
-//                et_role.setText();
+                et_name.setText(map.get("name"));
+                et_pw.setText(map.get("password"));
+                et_role.setText(map.get("role"));
 
                 //
                 //tv_view.setText(s);

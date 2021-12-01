@@ -75,18 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> list = new ArrayList<String>();
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String sql = "select _id, name, age, mobile from emp order by _id desc ";
-
-        Cursor cursor = db.rawQuery(sql, null);
-
-        while (cursor.moveToNext()) {
-            list.add(cursor.getString(1));
-        }
-
-        db.close();
-
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
                 android.R.layout.simple_list_item_1,
                 list);
@@ -99,6 +87,21 @@ public class MainActivity extends AppCompatActivity {
 
         //전체조회
         View.OnClickListener readHandler = v -> {
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+            String sql = "select _id, name, age, mobile from emp order by _id desc ";
+
+            Cursor cursor = db.rawQuery(sql, null);
+
+            while (cursor.moveToNext()) {
+                list.add(cursor.getString(1));
+            }
+
+            db.close();
+//            System.out.println(lv.getAdapter());
+//            lv.getAdapter().notifyAll();
+
 
             //et_view.setText("");
 //            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
@@ -139,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
 //            lv.setOnItemClickListener((adapterView, view, i, l) -> {
 //                Toast.makeText(this,list.get(i).get("name"),Toast.LENGTH_SHORT).show();
 //            });
+
+
 
         };
 
