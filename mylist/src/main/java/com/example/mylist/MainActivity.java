@@ -17,6 +17,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     ListView lv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +79,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,list.get(i).get("name"),Toast.LENGTH_SHORT).show();
         });
 
-
     }
 }
+
