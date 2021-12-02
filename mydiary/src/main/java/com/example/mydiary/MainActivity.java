@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
 //                        intent.putExtra("selected",vo); //객체 넘기는 방법
                         startActivity(intent);
 
+                        //교수님
+//                        ((Myadapter)listDiary.getAdapter()).setData(MemoDAO.selectAll(dbHelper));
+//                                list.set()로 해도 괜찮을 것 같음.
+//                        ((Myadapter)listDiary.getAdapter()).notifyDataSetChanged();
                     })
                     .setNegativeButton("삭제",(di, i) -> {
                         Log.d("alert","삭제버튼");
@@ -77,8 +81,11 @@ public class MainActivity extends AppCompatActivity {
                         vo.set_id(list.get(position).get_id());
                         MemoDAO.delete(dbHelper,vo);
 
+                        list.remove(position);
+                        ((Myadapter)listDiary.getAdapter()).notifyDataSetChanged();
+
 //                        listDiary.adapter.notifyDataSetChanged(); //바로 반영
-                        listDiary.getAdapter().notify();
+                        //listDiary.getAdapter().notify();
 
                     })
                     .create()

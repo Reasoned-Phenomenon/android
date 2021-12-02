@@ -17,6 +17,15 @@ public class Myadapter extends BaseAdapter {
     public Myadapter (ArrayList<DiaryVO> data) {
         this.data = data;
     }
+
+    public ArrayList<DiaryVO> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<DiaryVO> data) {
+        this.data = data;
+    }
+
     @Override
     public int getCount() {
         return data.size();
@@ -40,9 +49,11 @@ public class Myadapter extends BaseAdapter {
 
         TextView txtTitle = convertView.findViewById(R.id.txtTitle);
         TextView txtContent = convertView.findViewById(R.id.txtContent);
+        TextView txtTime = convertView.findViewById(R.id.txtTime);
 
         txtTitle.setText(data.get(position).getTitle());
         txtContent.setText(data.get(position).getContent());
+        txtTime.setText(data.get(position).getTime());
 
         return convertView;
     }
