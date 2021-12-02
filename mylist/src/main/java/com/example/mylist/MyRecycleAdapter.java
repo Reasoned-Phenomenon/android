@@ -13,20 +13,35 @@ import java.util.Map;
 
 public class MyRecycleAdapter extends RecyclerView.Adapter<MyRecycleAdapter.MyViewHolder> {
 
-    ArrayList<Map<String,String>> data;
+//    ArrayList<Map<String,String>> data;
+//
+//    public ArrayList<Map<String, String>> getData() {
+//        return data;
+//    }
+//
+//    public void setData(ArrayList<Map<String, String>> data) {
+//        this.data = data;
+//    }
+//
+//    public MyRecycleAdapter(ArrayList<Map<String, String>> data) {
+//        this.data = data;
+//    }
 
-    public ArrayList<Map<String, String>> getData() {
+    ArrayList<MemoVO> data;
+
+    public ArrayList<MemoVO> getData() {
         return data;
     }
 
-    public void setData(ArrayList<Map<String, String>> data) {
+    public void setData(ArrayList<MemoVO> data) {
+        this.data = data;
+    }
+
+    public MyRecycleAdapter(ArrayList<MemoVO> data) {
         this.data = data;
     }
 
     public MyRecycleAdapter () {};
-    public MyRecycleAdapter(ArrayList<Map<String, String>> data) {
-        this.data = data;
-    }
 
     @NonNull
     @Override
@@ -37,12 +52,16 @@ public class MyRecycleAdapter extends RecyclerView.Adapter<MyRecycleAdapter.MyVi
         return vh;
     }
 
+//    @Override
+//    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+//        holder.txtName.setText(data.get(position).get("name"));
+//        holder.txtAddr.setText(data.get(position).get("addr"));
+//    }
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txtName.setText(data.get(position).get("name"));
-        holder.txtAddr.setText(data.get(position).get("addr"));
+        holder.txtName.setText(data.get(position).getTitle());
+        holder.txtAddr.setText(data.get(position).getContent());
     }
-
     @Override
     public int getItemCount() {
         return data.size();
