@@ -1,5 +1,6 @@
 package com.example.mymemo;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -147,7 +149,7 @@ public class AddActivity extends AppCompatActivity {
             String str = updateId+"/"+updateName+"/"+updateAge+"/"+updatePhone;
             Intent intentUpdate = new Intent(getApplicationContext(), MainActivity.class);
             intentUpdate.putExtra("update",str);
-            setResult(2, intentUpdate);
+            setResult(20, intentUpdate);
             finish();
 
         };
@@ -158,5 +160,17 @@ public class AddActivity extends AppCompatActivity {
         btn_update.setOnClickListener(updateHandler);
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("Add");
+        System.out.println(requestCode);
+        System.out.println(resultCode);
+        System.out.println("Add");
+
+    }
+
+
 
 }

@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent backIntent = getIntent();
         if (backIntent.hasExtra("msg")) {
-            Toast.makeText(this,backIntent.getStringExtra("msg"),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,backIntent.getStringExtra("msg"),Toast.LENGTH_LONG).show();
         }
 
     }

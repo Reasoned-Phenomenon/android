@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         btn_goToAdd.setOnClickListener(v-> {
             Intent intentGoToAdd = new Intent(getApplicationContext(), AddActivity.class);
 //            startActivity(intentBack);
-            startActivityForResult(intentGoToAdd,1);
+            startActivityForResult(intentGoToAdd,10);
         });
 
     }
@@ -160,6 +160,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("Main");
+        System.out.println(requestCode);
+        System.out.println(resultCode);
+        System.out.println("Main");
 
         //등록
         if(resultCode == 1) {

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -67,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
            fileRead(FileName);
 
         });
-
 
     }
 

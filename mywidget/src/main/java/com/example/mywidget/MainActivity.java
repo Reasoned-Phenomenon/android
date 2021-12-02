@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
         
         tv = findViewById(R.id.txtResult); //결과창
 
-
-
         //이벤트 핸들러 - 동일한 핸들러로 처리.
         View.OnClickListener handler = v -> {
 

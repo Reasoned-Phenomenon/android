@@ -85,7 +85,6 @@ public class MemoDAO {
     //수정
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void update(DBHelper dbHelper, DiaryVO vo) {
-        System.out.println(vo);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -114,3 +113,4 @@ public class MemoDAO {
         db.close();
     }
 }
+

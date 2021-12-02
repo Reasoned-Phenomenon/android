@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     .show();
 
         });
+
         btn_list.setOnClickListener(v->{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setItems(city,(d, i) -> {
