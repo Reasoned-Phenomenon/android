@@ -64,7 +64,6 @@ public class MemoDAO {
 
     }
 
-
     //등록
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void insert(DBHelper dbHelper, DiaryVO vo) {
@@ -86,7 +85,7 @@ public class MemoDAO {
     //수정
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void update(DBHelper dbHelper, DiaryVO vo) {
-
+        System.out.println(vo);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();

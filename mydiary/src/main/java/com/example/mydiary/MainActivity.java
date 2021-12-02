@@ -11,6 +11,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //값 넘겨줘야함.
                         Intent intent = new Intent(this, WriteActivity.class);
+
                         intent.putExtra("id",vo.get_id());
                         intent.putExtra("title",vo.getTitle());
                         intent.putExtra("content",vo.getContent());
@@ -84,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        Intent backIntent = getIntent();
+        if (backIntent.hasExtra("msg")) {
+            Toast.makeText(this,backIntent.getStringExtra("msg"),Toast.LENGTH_SHORT).show();
+        }
 
     }
-
 
 }

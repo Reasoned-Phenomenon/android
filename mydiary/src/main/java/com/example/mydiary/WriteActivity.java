@@ -36,25 +36,26 @@ public class WriteActivity extends AppCompatActivity {
 
         btnSave.setOnClickListener(v-> {
 
+            Intent intent1 = new Intent(this,MainActivity.class);
+
             DiaryVO vo = new DiaryVO();
 
             vo.setTitle(editTitle.getText().toString());
             vo.setContent(editContent.getText().toString());
 
             if(intent.hasExtra("id")) {
-
+                String id= intent.getStringExtra("id");
+                vo.set_id(id);
                 MemoDAO.update(dbHelper,vo);
+                intent1.putExtra("msg","수정됐습니다.");
 
             } else {
 
                 MemoDAO.insert(dbHelper,vo);
+                intent1.putExtra("msg","등록됐습니다.");
 
             }
 
-            editTitle.setText("");
-            editContent.setText("");
-
-            Intent intent1 = new Intent(this,MainActivity.class);
             startActivity(intent1);
 
         });
