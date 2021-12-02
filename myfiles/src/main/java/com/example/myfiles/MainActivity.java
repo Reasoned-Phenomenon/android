@@ -44,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
             // et 에서 내용 가져와서 일기 쓰게.
 
 //            fileWrite(FileName);
+
+            //전역변수 안 쓸때.
             String reName = ""+datePicker1.getYear()+(datePicker1.getMonth()+1)+datePicker1.getDayOfMonth()+".txt";
-            System.out.println(reName);
+
             try{
                 FileOutputStream outFs = openFileOutput(reName, Context.MODE_PRIVATE);
                 String str = et_dlg.getText().toString();
