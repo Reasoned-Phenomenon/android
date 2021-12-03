@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("id",vo.get_id());
                         intent.putExtra("title",vo.getTitle());
                         intent.putExtra("content",vo.getContent());
-                        intent.putExtra("uri",vo.getImg());
+                        if(vo.getImg() != null) {
+                            intent.putExtra("uri",vo.getImg());
+                        }
 
 //                        intent.putExtra("selected",vo); //객체 넘기는 방법
                         startActivity(intent);
@@ -96,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
                         list.remove(position);
                         ((Myadapter)listDiary.getAdapter()).notifyDataSetChanged();
-
 
 //                        listDiary.adapter.notifyDataSetChanged(); //바로 반영
                         //listDiary.getAdapter().notify();

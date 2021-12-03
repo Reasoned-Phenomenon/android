@@ -58,7 +58,9 @@ public class WriteActivity extends AppCompatActivity {
         if(intent.hasExtra("id")) {
             editTitle.setText(intent.getStringExtra("title"));
             editContent.setText(intent.getStringExtra("content"));
-            imageDiary.setImageURI(Uri.parse(intent.getStringExtra("uri")));
+            if(intent.hasExtra("uri")) {
+                imageDiary.setImageURI(Uri.parse(intent.getStringExtra("uri")));
+            }
         }
 
         btnSave.setOnClickListener(v-> {
@@ -69,10 +71,10 @@ public class WriteActivity extends AppCompatActivity {
 
             vo.setTitle(editTitle.getText().toString());
             vo.setContent(editContent.getText().toString());
-            vo.setImg(photoURI.toString());
 
-            System.out.println(photoURI.toString());
-
+            if(photoURI != null) {
+                vo.setImg(photoURI.toString());
+            }
 
             if(intent.hasExtra("id")) {
                 String id= intent.getStringExtra("id");
@@ -108,8 +110,6 @@ public class WriteActivity extends AppCompatActivity {
 
     }
 
-
-
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //파일 저장 X
@@ -136,7 +136,6 @@ public class WriteActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -154,15 +153,12 @@ public class WriteActivity extends AppCompatActivity {
 //            Bitmap imageBitmap = (Bitmap) extras.get("data");
 //            imageDiary.setImageBitmap(imageBitmap);
 //            imageDiary.setImageBitmap(photoURI);
-            System.out.println(photoURI);
             imageDiary.setImageURI(photoURI);
         } else if (requestCode == REQUEST_PHOTO_SELECTION && resultCode == RESULT_OK) {
             photoURI = data.getData();
             imageDiary.setImageURI(photoURI);
         }
     }
-
-
 
     private File createImageFile() throws IOException {
         // Create an image file name
