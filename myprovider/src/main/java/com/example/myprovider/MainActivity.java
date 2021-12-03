@@ -2,10 +2,8 @@ package com.example.myprovider;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
-import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,10 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.pedro.library.AutoPermissions;
+import com.pedro.library.AutoPermissionsListener;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
+
+    EditText et_email,et_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,15 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
         Button btn_contact = findViewById(R.id.btn_contact);
         Button btn_call = findViewById(R.id.btn_call);
+        Button btn_set = findViewById(R.id.btn_set);
 
         EditText et_view = findViewById(R.id.et_view);
+        et_email = findViewById(R.id.et_email);
+        et_number = findViewById(R.id.et_number);
 
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG,Manifest.permission.READ_CONTACTS},MODE_PRIVATE);
 
-//        AutoPermissions.Companion.loadAllPermissions(this,101);
+        AutoPermissions.Companion.loadAllPermissions(this,101);
 
         btn_call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +54,12 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             }
         });
 
+        btn_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addContact();
+            }
+        });
 
     }
 
@@ -128,6 +140,24 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
+    }
+
+    public void addContact () {
+
+        et_email = findViewById(R.id.et_email);
+        et_number = findViewById(R.id.et_number);
+
+        Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+        intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, et_email.getText())
+                .putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE,
+                        ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                .putExtra(ContactsContract.Intents.Insert.PHONE, et_number.getText())
+                .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,
+                        ContactsContract.CommonDataKinds.Phone.TYPE_WORK);
+
+        startActivity(intent);
+
     }
 }
 
