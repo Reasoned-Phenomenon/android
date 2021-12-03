@@ -1,5 +1,6 @@
 package com.example.myprovider;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -17,7 +18,7 @@ import android.widget.EditText;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements AutoPermissionsListener{
+public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG,Manifest.permission.READ_CONTACTS},MODE_PRIVATE);
 
-        AutoPermissions.Companion.loadAllPermissions(this,101);
+//        AutoPermissions.Companion.loadAllPermissions(this,101);
 
         btn_call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         return callBuff.toString();
     }
 
-    public String getContacts () {
+    public String getContacts() {
 
         String[] PROJECTION = //Callset과 유사. 컬럼정보.
                 {
@@ -105,14 +106,28 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         c.moveToFirst();
 
         do {
-            contactBuff.append("Row ID:"+c.getString(0)+"\n");
-            contactBuff.append(" 키:"+c.getString(1)+"\n");
-            contactBuff.append(" 이름:"+c.getString(2)+"\n\n\n");
+            contactBuff.append("Row ID:" + c.getString(0) + "\n");
+            contactBuff.append(" 키:" + c.getString(1) + "\n");
+            contactBuff.append(" 이름:" + c.getString(2) + "\n\n\n");
         } while (c.moveToNext());
 
         c.close();
 
         return contactBuff.toString();
+    }
+
+    @Override
+    public void onDenied(int i, String[] strings) {
+    }
+
+    @Override
+    public void onGranted(int i, String[] strings) {
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
     }
 }
 
