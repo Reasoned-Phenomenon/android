@@ -19,7 +19,7 @@ public class MemoDAO {
 
         ArrayList<DiaryVO> list = new ArrayList<DiaryVO>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String sql = "select _id, title, content, time From diary order by _id desc";
+        String sql = "select _id, title, content, time, img From diary order by _id desc";
 
         Cursor cursor = db.rawQuery(sql,null);
         while (cursor.moveToNext()) {
@@ -30,6 +30,7 @@ public class MemoDAO {
             vo.setTitle(cursor.getString(1));
             vo.setContent(cursor.getString(2));
             vo.setTime(cursor.getString(3));
+            vo.setImg(cursor.getString(4));
 
             list.add(vo);
         }
@@ -46,7 +47,7 @@ public class MemoDAO {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String id = vo.get_id();
-        String sql = "select _id, title, content, time From diary WHERE _id="+id;
+        String sql = "select _id, title, content, time, img From diary WHERE _id="+id;
 
         Cursor cursor = db.rawQuery(sql,null);
         if (cursor.moveToNext()) {
@@ -55,6 +56,7 @@ public class MemoDAO {
             vo.setTitle(cursor.getString(1));
             vo.setContent(cursor.getString(2));
             vo.setTime(cursor.getString(3));
+            vo.setImg(cursor.getString(4));
 
         }
 
@@ -73,6 +75,10 @@ public class MemoDAO {
         contentValues.put("title", vo.getTitle());
         contentValues.put("content", vo.getContent());
 
+        if(vo.getImg() != null) {
+            contentValues.put("img", vo.getImg());
+        }
+
         LocalDate dt = LocalDate.now();
         String sdt = dt.format(DateTimeFormatter.ISO_DATE);
         contentValues.put("time",sdt);
@@ -90,6 +96,10 @@ public class MemoDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", vo.getTitle());
         contentValues.put("content", vo.getContent());
+
+        if(vo.getImg() != null) {
+            contentValues.put("img", vo.getImg());
+        }
 
         LocalDate dt = LocalDate.now();
         String sdt = dt.format(DateTimeFormatter.ISO_DATE);

@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
         et_email = findViewById(R.id.et_email);
         et_number = findViewById(R.id.et_number);
 
+        //auto퍼미션이 되기때문에, 따로 물을 필요 없음.
         //ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG,Manifest.permission.READ_CONTACTS},MODE_PRIVATE);
-
         AutoPermissions.Companion.loadAllPermissions(this,101);
 
         btn_call.setOnClickListener(new View.OnClickListener() {

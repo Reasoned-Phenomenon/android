@@ -2,10 +2,13 @@ package com.example.mydiary;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -35,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         Myadapter adapter = new Myadapter(list);
         listDiary.setAdapter(adapter);
 
-        //listView 초기화 -> Adapter 지정하고 클릭이벤트
+ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},MODE_PRIVATE);
+
+//listView 초기화 -> Adapter 지정하고 클릭이벤트
         //쓰기버튼 이벤트 지정 : writeActivity로 이동
 
         //아이템 클릭 이벤트 : 수정 / 삭제
