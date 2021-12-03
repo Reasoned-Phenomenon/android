@@ -148,11 +148,6 @@ public class WriteActivity extends AppCompatActivity {
 
         //이미지 저장 후 경로를 가져올 때
         } else if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK){
-//            System.out.println("들어와짐");
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            imageDiary.setImageBitmap(imageBitmap);
-//            imageDiary.setImageBitmap(photoURI);
             imageDiary.setImageURI(photoURI);
         } else if (requestCode == REQUEST_PHOTO_SELECTION && resultCode == RESULT_OK) {
             photoURI = data.getData();

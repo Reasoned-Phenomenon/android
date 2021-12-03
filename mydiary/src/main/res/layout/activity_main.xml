@@ -11,6 +11,7 @@
         android:id="@+id/btnWriteForm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="31dp"
         android:text="일기작성"
         app:layout_constraintBottom_toTopOf="@+id/listDiary"

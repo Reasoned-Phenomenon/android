@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("id",vo.get_id());
                         intent.putExtra("title",vo.getTitle());
                         intent.putExtra("content",vo.getContent());
+
                         if(vo.getImg() != null) {
                             intent.putExtra("uri",vo.getImg());
                         }
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //교수님
 //                        ((Myadapter)listDiary.getAdapter()).setData(MemoDAO.selectAll(dbHelper));
-//                                list.set()로 해도 괜찮을 것 같음.
+//                         list.set()로 해도 괜찮을 것 같음.
 //                        ((Myadapter)listDiary.getAdapter()).notifyDataSetChanged();
                     })
                     .setNegativeButton("삭제",(di, i) -> {
@@ -90,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
                         vo.set_id(list.get(position).get_id());
                         
                         //파일삭제
-                        File file = new File(list.get(position).getImg());
-                        file.delete();
+//                        File file = new File(list.get(position).getImg());
+//                        file.delete();
                         
                         MemoDAO.delete(dbHelper,vo);
 
