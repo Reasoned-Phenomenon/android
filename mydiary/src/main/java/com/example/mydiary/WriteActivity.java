@@ -26,12 +26,16 @@ public class WriteActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 2;
+    static final int REQUEST_PHOTO_SELECTION = 3;
 
-    Button btnSave,btnImage;
-    EditText editTitle,editContent;
-    ImageView imageDiary;
+    String currentPhotoPath;
 
     Uri photoURI;
+    File photoFile;
+
+    Button btnSave,btnImage,btn_select;
+    EditText editTitle,editContent;
+    ImageView imageDiary;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -41,6 +45,7 @@ public class WriteActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.btnSave);
         btnImage = findViewById(R.id.btnImage);
+        btn_select = findViewById(R.id.btn_select);
 
         editTitle = findViewById(R.id.editTitle);
         editContent = findViewById(R.id.editContent);
@@ -53,6 +58,7 @@ public class WriteActivity extends AppCompatActivity {
         if(intent.hasExtra("id")) {
             editTitle.setText(intent.getStringExtra("title"));
             editContent.setText(intent.getStringExtra("content"));
+            imageDiary.setImageURI(Uri.parse(intent.getStringExtra("uri")));
         }
 
         btnSave.setOnClickListener(v-> {
@@ -63,6 +69,10 @@ public class WriteActivity extends AppCompatActivity {
 
             vo.setTitle(editTitle.getText().toString());
             vo.setContent(editContent.getText().toString());
+            vo.setImg(photoURI.toString());
+
+            System.out.println(photoURI.toString());
+
 
             if(intent.hasExtra("id")) {
                 String id= intent.getStringExtra("id");
@@ -89,53 +99,70 @@ public class WriteActivity extends AppCompatActivity {
             }
         });
 
+        btn_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPhoto();
+            }
+        });
+
     }
 
 
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        System.out.println(takePictureIntent.resolveActivity(getPackageManager()));
+        //파일 저장 X
+//        System.out.println(takePictureIntent.resolveActivity(getPackageManager()));
 //        if (takePictureIntent.resolveActivity(getPackageManager()) != null) { //빼면 실행됨.
 //            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE); //결과를 가져와서 보여줘야하기때문에 ForResult 사용.
 //        }
 
-        File photoFile = null;
+        //파일 저장 O
+        photoFile = null;
         try {
-            System.out.println("try");
             photoFile = createImageFile();
+            System.out.println(photoFile);
         } catch (IOException ex) {
             // Error occurred while creating the File
             System.out.println("에러발생");
         }
         // Continue only if the File was successfully created
         if (photoFile != null) {
-            photoURI = FileProvider.getUriForFile(this,
-                    "com.example.mydiary",
-                    photoFile);
+            photoURI = FileProvider.getUriForFile(this,"com.example.mydiary",photoFile);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
         }
+
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        //저장하지않고 비트맵만 가져올 때
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imageDiary.setImageBitmap(imageBitmap);
+
+        //이미지 저장 후 경로를 가져올 때
         } else if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK){
-            System.out.println("들어와짐");
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            imageDiary.setImageBitmap(imageBitmap);
+//            System.out.println("들어와짐");
+//            Bundle extras = data.getExtras();
+//            Bitmap imageBitmap = (Bitmap) extras.get("data");
+//            imageDiary.setImageBitmap(imageBitmap);
 //            imageDiary.setImageBitmap(photoURI);
+            System.out.println(photoURI);
+            imageDiary.setImageURI(photoURI);
+        } else if (requestCode == REQUEST_PHOTO_SELECTION && resultCode == RESULT_OK) {
+            photoURI = data.getData();
+            imageDiary.setImageURI(photoURI);
         }
     }
 
-    String currentPhotoPath;
+
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -152,4 +179,10 @@ public class WriteActivity extends AppCompatActivity {
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
+
+    private void getPhoto () {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_PHOTO_SELECTION);
+    }
+
 }

@@ -1,11 +1,14 @@
 package com.example.mydiary;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 public class Myadapter extends BaseAdapter {
@@ -50,10 +53,18 @@ public class Myadapter extends BaseAdapter {
         TextView txtTitle = convertView.findViewById(R.id.txtTitle);
         TextView txtContent = convertView.findViewById(R.id.txtContent);
         TextView txtTime = convertView.findViewById(R.id.txtTime);
+        ImageView imageView = convertView.findViewById(R.id.imageView);
 
         txtTitle.setText(data.get(position).getTitle());
         txtContent.setText(data.get(position).getContent());
         txtTime.setText(data.get(position).getTime());
+
+        if(data.get(position).getImg() != null) {
+            Uri uri= Uri.parse(data.get(position).getImg());
+
+            imageView.setImageURI(uri);
+
+        }
 
         return convertView;
     }

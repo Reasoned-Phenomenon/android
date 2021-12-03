@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         Myadapter adapter = new Myadapter(list);
         listDiary.setAdapter(adapter);
 
-ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},MODE_PRIVATE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},MODE_PRIVATE);
 
-//listView 초기화 -> Adapter 지정하고 클릭이벤트
+        //listView 초기화 -> Adapter 지정하고 클릭이벤트
         //쓰기버튼 이벤트 지정 : writeActivity로 이동
 
         //아이템 클릭 이벤트 : 수정 / 삭제
@@ -70,6 +71,7 @@ ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_E
                         intent.putExtra("id",vo.get_id());
                         intent.putExtra("title",vo.getTitle());
                         intent.putExtra("content",vo.getContent());
+                        intent.putExtra("uri",vo.getImg());
 
 //                        intent.putExtra("selected",vo); //객체 넘기는 방법
                         startActivity(intent);
@@ -84,10 +86,17 @@ ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_E
 
                         DiaryVO vo = new DiaryVO();
                         vo.set_id(list.get(position).get_id());
+                        
+                        //파일삭제
+                        File file = new File(list.get(position).getImg());
+                        file.delete();
+                        
                         MemoDAO.delete(dbHelper,vo);
+
 
                         list.remove(position);
                         ((Myadapter)listDiary.getAdapter()).notifyDataSetChanged();
+
 
 //                        listDiary.adapter.notifyDataSetChanged(); //바로 반영
                         //listDiary.getAdapter().notify();
