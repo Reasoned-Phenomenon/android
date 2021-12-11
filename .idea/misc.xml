@@ -12,11 +12,15 @@
         <entry key="..\:/dev/androidWork/mywidget/mypet/src/main/res/layout/activity_main.xml" value="0.3515625" />
         <entry key="..\:/dev/androidWork/mywidget/src/main/res/layout/activity_calc.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/androidWork/mywidget/src/main/res/layout/activity_main.xml" value="0.36186594202898553" />
+        <entry key="..\:/dev/workSpace_as/android/myactivity/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/myactivity/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/dev/workSpace_as/android/myactivity/src/main/res/layout/activity_life.xml" value="0.2203125" />
         <entry key="..\:/dev/workSpace_as/android/myactivity/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/dev/workSpace_as/android/mydialog/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/workSpace_as/android/mydialog/src/main/res/layout/activity_main.xml" value="0.9" />
         <entry key="..\:/dev/workSpace_as/android/mydialog/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/mydiary/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/mydiary/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/dev/workSpace_as/android/mydiary/src/main/res/layout/activity_main.xml" value="0.32653985507246375" />
         <entry key="..\:/dev/workSpace_as/android/mydiary/src/main/res/layout/activity_view.xml" value="0.32653985507246375" />
         <entry key="..\:/dev/workSpace_as/android/mydiary/src/main/res/layout/activity_write.xml" value="0.33" />
@@ -24,14 +28,33 @@
         <entry key="..\:/dev/workSpace_as/android/mydiary/src/main/res/xml/file_paths.xml" value="0.36614583333333334" />
         <entry key="..\:/dev/workSpace_as/android/mydiary/src/main/res/xml/filepaths.xml" value="0.1947463768115942" />
         <entry key="..\:/dev/workSpace_as/android/myfile/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/dev/workSpace_as/android/myfiles/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/dev/workSpace_as/android/myfiles/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/dev/workSpace_as/android/myhero/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/dev/workSpace_as/android/myhero/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/dev/workSpace_as/android/myhome/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/myhttp/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22291666666666668" />
+        <entry key="..\:/dev/workSpace_as/android/myhttp/src/main/res/drawable/ic_launcher_background.xml" value="0.22291666666666668" />
         <entry key="..\:/dev/workSpace_as/android/myhttp/src/main/res/layout/activity_main.xml" value="0.259375" />
+        <entry key="..\:/dev/workSpace_as/android/mylayout/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/mylist/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
         <entry key="..\:/dev/workSpace_as/android/mylist/src/main/res/layout/activity_main.xml" value="0.18385416666666668" />
         <entry key="..\:/dev/workSpace_as/android/mylist/src/main/res/layout/activity_recycle.xml" value="0.18385416666666668" />
         <entry key="..\:/dev/workSpace_as/android/mylist/src/main/res/layout/list_item.xml" value="0.5" />
+        <entry key="..\:/dev/workSpace_as/android/mymemo/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22291666666666668" />
+        <entry key="..\:/dev/workSpace_as/android/mymemo/src/main/res/drawable/ic_launcher_background.xml" value="0.22291666666666668" />
+        <entry key="..\:/dev/workSpace_as/android/mymemo/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22291666666666668" />
+        <entry key="..\:/dev/workSpace_as/android/mymemo/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22291666666666668" />
+        <entry key="..\:/dev/workSpace_as/android/mypet/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/mypet/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/myprovider/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22291666666666668" />
+        <entry key="..\:/dev/workSpace_as/android/myprovider/src/main/res/drawable/ic_launcher_background.xml" value="0.22291666666666668" />
         <entry key="..\:/dev/workSpace_as/android/myprovider/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
-        <entry key="..\:/dev/workSpace_as/android/mysword/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/dev/workSpace_as/android/mysword/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/mysword/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/mysword/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/dev/workSpace_as/android/mysword/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.38229166666666664" />
+        <entry key="..\:/dev/workSpace_as/android/mysword/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.38229166666666664" />
         <entry key="..\:/dev/workSpace_as/android/myword/src/main/res/layout/activity_main.xml" value="0.67" />
         <entry key="..\:/dev/workSpace_as/android/mywordsword/src/main/res/layout/activity_main.xml" value="0.3515625" />
       </map>
