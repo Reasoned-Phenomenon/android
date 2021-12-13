@@ -10,28 +10,28 @@
         android:id="@+id/tv_list_rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tv_list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tv_list_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/tv_list_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:text="TextView" />
 
 </LinearLayout>

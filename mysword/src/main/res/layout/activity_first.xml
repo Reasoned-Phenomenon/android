@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context=".FirstActivity">
 
     <TextView
@@ -19,16 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp"><![CDATA[>
-
-        ]]></LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="348dp"
@@ -42,8 +33,8 @@
         android:id="@+id/et_name"
         android:layout_width="153dp"
         android:layout_height="48dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="372dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="388dp"
         android:ems="10"
         android:hint="Name Here"
         android:inputType="textPersonName"
@@ -54,10 +45,10 @@
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="372dp"
+        android:layout_marginTop="384dp"
         android:text="게임시작"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.822"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,28 +70,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Rank" />
+            android:text="순위" />
 
         <TextView
             android:id="@+id/tv_title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Name" />
+            android:text="이름" />
 
         <TextView
             android:id="@+id/tv_title_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Score" />
+            android:text="점수" />
 
         <TextView
             android:id="@+id/tv_title_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Time" />
+            android:text="시간" />
 
     </LinearLayout>
 
