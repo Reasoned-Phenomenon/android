@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_send;
     TextView tv_time, tv_topic, tv_rank, tv_score;
 
-    String str_start, str_def,inputWord, outputWord;
+    String str_start, str_def,inputWord, outputWord, user_name;
     int int_score;
 
     ArrayList<String> list = new ArrayList<String>();
@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         RecordDAO dao = new RecordDAO();
         tv_rank.append(Integer.toString( dao.maxRec(dbHelper)) );
 
+        //이름 저장
+        Intent intent = getIntent();
+        user_name = intent.getStringExtra("name");
+
         //제시어
         String[] arr = new String[] {"홍길동","대한민국","예담","대구","나비잠","아슬라","여우비","별하"};
 
@@ -87,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
         //다이얼 로그
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("alert")
-                .setMessage("시간이 초과 됐습니다")
+                .setMessage("게임이 종료 됐습니다")
                 .setPositiveButton("다시하기",(dialogInterface, i) -> {
                     finish();
                     startActivity(new Intent(MainActivity.this, MainActivity.class));
                 })
                 .setNegativeButton("종료",(dialogInterface, i) -> {
-
+                    finish();
                 })
                 .create();
 
@@ -107,12 +111,14 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             public void onFinish() {
                 tv_time.setText("시간 초과!!!");
+
                 //다이얼로그 띄워주기
                 builder.show();
+
                 //기록저장
                 //TODO - 다이얼로그로 이름 받기
                 RecordDAO dao = new RecordDAO();
-                dao.insertRec(dbHelper,int_score);
+                dao.insertRec(dbHelper,user_name,int_score);
             }
         }.start();
 
@@ -182,7 +188,13 @@ public class MainActivity extends AppCompatActivity {
 
                                     //기록 저장 - 승리시 50점 추가
                                     RecordDAO dao = new RecordDAO();
-                                    dao.insertRec(dbHelper,int_score+50);
+                                    dao.insertRec(dbHelper,user_name,int_score+50);
+                                    
+                                    //시간 멈춤
+                                    timer.cancel();
+
+                                    //다이얼로그 보여줌
+                                    builder.show();
 
                                 } else {
 

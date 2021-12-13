@@ -4,7 +4,16 @@ public class RecordVO {
 
     String id;
     String name;
+    int score;
     String time;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public String getId() {
         return id;

@@ -21,6 +21,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " time    text)";
         db.execSQL(sql);
 
+        //초기값
+        sql = "insert into record (name,score,time) values('start','10','2021-12-02')";
+        db.execSQL(sql);
+        sql = "insert into record (name,score,time) values('start','20','2021-12-04')";
+        db.execSQL(sql);
+        sql = "insert into record (name,score,time) values('start','30','2021-12-05')";
+        db.execSQL(sql);
     }
 
     public void onOpen(SQLiteDatabase db) {
