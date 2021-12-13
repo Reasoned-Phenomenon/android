@@ -14,7 +14,9 @@
             <option value="$PROJECT_DIR$/myactivity" />
             <option value="$PROJECT_DIR$/mydialog" />
             <option value="$PROJECT_DIR$/mydiary" />
+            <option value="$PROJECT_DIR$/mydrawer" />
             <option value="$PROJECT_DIR$/myfiles" />
+            <option value="$PROJECT_DIR$/myfragment" />
             <option value="$PROJECT_DIR$/myhero" />
             <option value="$PROJECT_DIR$/myhome" />
             <option value="$PROJECT_DIR$/myhttp" />
@@ -24,6 +26,7 @@
             <option value="$PROJECT_DIR$/mypet" />
             <option value="$PROJECT_DIR$/myprovider" />
             <option value="$PROJECT_DIR$/mysword" />
+            <option value="$PROJECT_DIR$/mywebview" />
             <option value="$PROJECT_DIR$/mywidget" />
           </set>
         </option>

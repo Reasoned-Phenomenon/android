@@ -1,0 +1,37 @@
+package com.example.myhero;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.MediaCodec;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+
+public class MainActivity extends AppCompatActivity {
+
+    ImageView iv_selected;
+    EditText et_guess;
+    Button btn_guess;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        iv_selected = findViewById(R.id.iv_selected);
+        et_guess = findViewById(R.id.et_guess);
+        btn_guess = findViewById(R.id.btn_guess);
+
+        //화면 로�
