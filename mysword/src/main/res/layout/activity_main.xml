@@ -68,4 +68,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="72dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="72dp"
+        android:gravity="left|center_vertical"
+        android:hint="Rank"
+        android:text="최고점 : "
+        app:layout_constraintEnd_toStartOf="@+id/tv_timer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="180dp"
+        android:text="현재 점수 : 0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
