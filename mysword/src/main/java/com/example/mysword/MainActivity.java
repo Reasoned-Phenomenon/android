@@ -59,10 +59,12 @@ public class MainActivity extends AppCompatActivity {
         view_rv.setAdapter(new MyRecycleAdapter(this,list));
 
         //다이얼 로그
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("alert")
                 .setMessage("시간이 초과 됐습니다")
                 .setPositiveButton("다시하기",(dialogInterface, i) -> {
+                    //TODO - 재시작 버튼 추가해야함
+                    System.out.println("다시 시작 다이얼로그");
                 })
                 .create();
 
@@ -70,13 +72,14 @@ public class MainActivity extends AppCompatActivity {
         CountDownTimer timer = new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tv_time.setText("남은 시간: " + millisUntilFinished / 1000);
+                tv_time.setText("남은 시간: " + millisUntilFinished / 1000 + " 초");
             }
 
             public void onFinish() {
                 //TODO-dialog 다시 하겠냐는 물음
-//                tv_time.setText("done!");
-//                builder.show();
+                tv_time.setText("시간 초과!!!");
+                //다이얼로그 띄워주기
+                builder.show();
             }
         }.start();
 
@@ -102,24 +105,26 @@ public class MainActivity extends AppCompatActivity {
                 if(lastLetter.equals(firstLetter)) {
                     String url = "https://stdict.korean.go.kr/api/search.do?key=228B1E6329BDCFE43D09A1BE5129B58B&req_type=json&q="+inputWord;
                     StringRequest request = new StringRequest(url, s->{
-
+                        //사전에 해당 단어가 없을 때 -> s가 널일때.
                         if (s.isEmpty()) {
-
-                            System.out.println("없는 단어입니다");
+                            //없는 단어라는 토스트 띄우기.
                             Toast.makeText(getApplicationContext(),"없는 단어입니다",Toast.LENGTH_SHORT).show();
 
+                        //사전에 해당 단어가 있을때
                         } else {
 
                             Map<String,Object> map = gson.fromJson(s,Map.class);
                             str_def = ((Map)((Map)((List)((Map)map.get("channel")).get("item")).get(0)).get("sense")).get("definition").toString();
 
-                            //설명부분 토스트
+                            //설명부분을 토스트로 띄우기
                             Toast.makeText(getApplicationContext(),str_def,Toast.LENGTH_SHORT).show();
-
+                            
+                            //입력단어 뷰에 넣기
                             list.add(inputWord);
                             view_rv.setAdapter(new MyRecycleAdapter(getApplicationContext(),list));
                             ((MyRecycleAdapter)view_rv.getAdapter()).notifyDataSetChanged();
-
+                            
+                            //입력창 비우고, 시간 재시작
                             et_input.setText("");
                             timer.start();
                         }
@@ -129,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                     queue.add(request);
+                    
+                    //TODO-컴퓨터 대응
+
+                    
+                    
 
                 } else {
                     System.out.println("다시 입력해주세요");
