@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     Button btn_send;
     TextView tv_time;
 
-    String str_def,inputWord;
+    String str_def,inputWord, outputWord;
+    int int_score;
     ArrayList<String> list = new ArrayList<String>();
 
     @Override
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         //queue, gson 선언.
         RequestQueue queue = Volley.newRequestQueue(this);
         Gson gson = new Gson();
+
+        //DB 호출
+        DBHelper dbHelper = new DBHelper(this);
 
         //어댑터
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -68,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .create();
 
-        //TODO - 타이머
+        //타이머
         CountDownTimer timer = new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -76,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                //TODO-dialog 다시 하겠냐는 물음
                 tv_time.setText("시간 초과!!!");
                 //다이얼로그 띄워주기
                 builder.show();
@@ -123,22 +127,63 @@ public class MainActivity extends AppCompatActivity {
                             list.add(inputWord);
                             view_rv.setAdapter(new MyRecycleAdapter(getApplicationContext(),list));
                             ((MyRecycleAdapter)view_rv.getAdapter()).notifyDataSetChanged();
+                            view_rv.scrollToPosition(view_rv.getAdapter().getItemCount()-1);
                             
                             //입력창 비우고, 시간 재시작
                             et_input.setText("");
                             timer.start();
+
+                            //글자 길이에 따라서 점수획득
+                            int_score += inputWord.length();
                         }
+                        
+                    //volley 에러 발생시
                     },e->{
                         System.out.println("에러발생");
                         System.out.println(e);
                     });
 
                     queue.add(request);
-                    
+
                     //TODO-컴퓨터 대응
 
-                    
-                    
+                    outputWord = inputWord.substring(inputWord.length()-1)+"??";
+                    String comUrl = "https://stdict.korean.go.kr/api/search.do?key=228B1E6329BDCFE43D09A1BE5129B58B&req_type=json&advanced=y&method=wildcard&q="+outputWord;
+                    StringRequest comRequest = new StringRequest(comUrl, s->{
+                        if (s.isEmpty()) {
+                            //승리하였습니다
+                            Toast.makeText(getApplicationContext(), "승리하셨습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Map<String, Object> comMap = gson.fromJson(s, Map.class);
+
+                            int forSize = ((List) ((List<?>) ((Map) comMap.get("channel")).get("item"))).size();
+                            Random random = new Random();
+                            int num = random.nextInt(forSize);
+                            outputWord = (((Map) ((List) ((Map) comMap.get("channel")).get("item")).get(num)).get("word")).toString();
+                            System.out.println(outputWord);
+                            //설명 내용
+                            str_def = ((Map) ((Map) ((List) ((Map) comMap.get("channel")).get("item")).get(num)).get("sense")).get("definition").toString();
+                            System.out.println(str_def);
+
+                            //특수문자 제거
+                            outputWord = outputWord.replace("-", "");
+
+                            //설명부분을 토스트로 띄우기
+                            Toast.makeText(getApplicationContext(), str_def, Toast.LENGTH_SHORT).show();
+
+                            //입력단어 뷰에 넣기
+                            list.add(outputWord);
+                            view_rv.setAdapter(new MyRecycleAdapter(getApplicationContext(), list));
+                            ((MyRecycleAdapter) view_rv.getAdapter()).notifyDataSetChanged();
+                            view_rv.scrollToPosition(view_rv.getAdapter().getItemCount() - 1);
+                        }
+                        //volley 에러 발생시
+                    },e->{
+                        System.out.println("에러발생");
+                        System.out.println(e);
+                    });
+
+                    queue.add(comRequest);
 
                 } else {
                     System.out.println("다시 입력해주세요");
